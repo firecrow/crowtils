@@ -1,4 +1,4 @@
 #!/bin/sh
 cc=clang-9
-
-$cc -o test test.c
+package=$1
+$cc -o "test_${package}" "test_${package}.c"

@@ -38,7 +38,7 @@ Crray *ctl_crray_alloc(size_t initial_size){
     return arr;
 }
 
-void ctl_crray_push(Crray *arr, CtlAbs *obj, int idx){
+void ctl_crray_insert(Crray *arr, CtlAbs *obj, int idx){
     if(arr->length+1 > arr->alloc_length){
         arr->alloc_length = arr->alloc_length*2;
         ctl_xptr(arr->content = realloc(arr->content, arr->alloc_length*sizeof(void *)));
@@ -64,13 +64,13 @@ Crray *ctl_split(CtlCounted *str, CtlCounted *sep){
         if(*p++ == *s){ s++;
         } else s = sep->data;
         if(s-sep->data == sep->length){
-            ctl_crray_push(arr, (CtlAbs *)ctl_counted_alloc(b, p-b-sep->length), -1);
+            ctl_crray_insert(arr, (CtlAbs *)ctl_counted_alloc(b, p-b-sep->length), -1);
             b = p;
             s = sep->data;
         }
     }
     if(b != p){
-        ctl_crray_push(arr, (CtlAbs *)ctl_counted_alloc(b, p-b), -1);
+        ctl_crray_insert(arr, (CtlAbs *)ctl_counted_alloc(b, p-b), -1);
     }
     return arr;
 }

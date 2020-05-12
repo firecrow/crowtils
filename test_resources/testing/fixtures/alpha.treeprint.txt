@@ -1,0 +1,12 @@
+bannana
+[0m|
+(-)-apple
+[0m|
+(+)-[31mdelta
+[0m   |
+   (-)-carrot
+[0m   |
+   (+)-xzephyr
+[0m      |
+      (-)-[31mespilon
+[0m

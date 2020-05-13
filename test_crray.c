@@ -117,4 +117,31 @@ int main(){
   handle_case(out_r == 0, "frst simple / split results ", out_r, "");
   out_r = strcmp("three", ((CtlCounted *)splitout->content[2])->data);
   handle_case(out_r == 0, "frst simple / split results ", out_r, "");
+
+
+
+  Crray *a = ctl_crray_alloc(1);
+
+  ctl_crray_push(a, (CtlAbs *)alpha);
+  ctl_crray_push(a, (CtlAbs *)bravo);
+  ctl_crray_push(a, (CtlAbs *)charlie);
+  ctl_crray_push(a, (CtlAbs *)delta);
+
+  handle_case(a->length == 4, "fourth push item has length 4", a->length, "");
+  char * out1 = (char*)ctl_crray_pop(a, -1);
+  handle_case(out1 == delta, "pop is most recent item", 0, "");
+  handle_case(a->length == 3, "after pop item has length 3", a->length, "");
+
+  char * out2 = (char*)ctl_crray_pop(a, -1);
+  handle_case(out2 == charlie, "pop is most recent item", 0, "");
+  handle_case(a->length == 2, "after pop item has length 2", a->length, "");
+
+  char * out3 = (char*)ctl_crray_pop(a, -1);
+  handle_case(out3 == bravo, "pop is most recent item", 0, "");
+  handle_case(a->length == 1, "after pop item has length 1", a->length, "");
+
+  char * out4 = (char*)ctl_crray_pop(a, -1);
+  handle_case(out4 == alpha, "pop is most recent item", 0, "");
+  handle_case(a->length == 0, "after pop item has length 0", a->length, "");
 }
+

@@ -49,10 +49,21 @@ void ctl_crray_insert(Crray *arr, CtlAbs *obj, int idx){
     arr->length++;
 }
 
+void ctl_crray_push(Crray *arr, CtlAbs *obj){
+    return ctl_crray_insert(arr, obj, -1);
+}
+
 void ctl_crray_remove(Crray *arr, int idx){
     ctl_ref_decr(arr->content[idx]);
     memmove(arr->content+idx, arr->content+(idx+1), (arr->length-idx)*sizeof(void *));
     arr->length--;
+}
+
+CtlAbs *ctl_crray_pop(Crray *arr, int idx){
+    if(idx == -1) idx = arr->length-1;
+    CtlAbs *item = arr->content[idx];
+    ctl_crray_remove(arr, idx);
+    return item;
 }
 
 Crray *ctl_split(CtlCounted *str, CtlCounted *sep){

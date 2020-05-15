@@ -70,7 +70,6 @@ CtlCounted *ctl_counted_format(const char *restrict format, ...){
   int length = vsnprintf(x, 1, format, args)+1;
   CtlCounted *c = ctl_counted_alloc(NULL, length);
   vsnprintf(c->data, length, format, args_copy);
-  printf("in thing:'%s'\n", c->data);
   c->length = length;
   va_end(args);
   va_end(args_copy);

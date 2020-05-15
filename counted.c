@@ -67,9 +67,10 @@ CtlCounted *ctl_counted_format(const char *restrict format, ...){
   /* put it on an array too small on purpose to get the full length in the
    * returned value */
   char x[] = " ";
-  int length = vsnprintf(x, 1, format, args);
+  int length = vsnprintf(x, 1, format, args)+1;
   CtlCounted *c = ctl_counted_alloc(NULL, length);
   vsnprintf(c->data, length, format, args_copy);
+  printf("in thing:'%s'\n", c->data);
   c->length = length;
   va_end(args);
   va_end(args_copy);

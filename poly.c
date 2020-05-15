@@ -1,13 +1,33 @@
 /* copyright 2020 firecrow silvernight, licensed under the wtfpl see LICENSE file */
 
+
+enum ctl_status { 
+    CTL_INVALID=-1,
+    CTL_NULL=0,
+    CTL_ERR=1,
+    CTL_OK,
+    CTL_NOT_STARTED,
+    CTL_PENDING,
+    CTL_ACTIVE,
+    CTL_COMPLETE
+};
+
+
 enum classes {
     CLASS_INVALID = -1,
-    CLASS_UNKNOWN = 0,
+    CLASS_NULL = 0,
+    CLASS_UNKNOWN,
     CLASS_COUNTED,
     CLASS_PTRARRAY,
     CLASS_CAR,
+    CLASS_TREE,
     CLASS_TRAIN,
-    CLASS_INT
+    CLASS_INT,
+    CLASS_BLOCK,
+    CLASS_CELL,
+    CLASS_OPP,
+    CLASS_SYMBOL,
+    CLASS_DEFINE
 };
 
 enum collection_status {
@@ -17,6 +37,7 @@ enum collection_status {
 
 struct base {
     enum classes class;
+    int id;
     int _refi;
     enum collection_status _collected;
     void (*free)(void *obj);

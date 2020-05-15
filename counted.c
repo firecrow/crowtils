@@ -41,6 +41,13 @@ CtlCounted *ctl_counted_alloc(char *data, size_t length){
     return c;
 }
 
+CtlCounted *asCtlCounted(CtlAbs *abs){
+    if(abs->base.class != CLASS_INT){
+        ctl_xerrlog("Attempted cast to CLASS_INT from incompatible class type");
+    }
+    return (CtlCounted *)abs;
+}
+
 struct counted *ctl_counted_from_cstr(char *str){
     return ctl_counted_alloc(str, strlen(str));
 }

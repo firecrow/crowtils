@@ -7,7 +7,7 @@
  * place
  */
   
-/* ---- float ----*/
+/* ---- int ----*/
 typedef struct crowint {
     struct base base;
     int value;
@@ -52,6 +52,13 @@ CtlFloat *ctl_float_alloc(float x){
     cf->value = x;
     cf->base.free = float_free;
     return cf;
+}
+
+CtlInt *asCtlInt(CtlAbs *abs){
+    if(abs->base.class != CLASS_INT){
+        ctl_xerrlog("Attempted cast to CLASS_INT from incompatible class type");
+    }
+    return (CtlInt *)abs;
 }
 
 CtlFloat *ctl_float_incr(CtlFloat *cf){

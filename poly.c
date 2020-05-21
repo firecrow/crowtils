@@ -16,7 +16,7 @@ enum ctl_status {
 enum classes {
     CLASS_INVALID = -1,
     CLASS_NULL = 0,
-    CLASS_UNKNOWN,
+    CLASS_UNDEFINED,
     CLASS_COUNTED,
     CLASS_PTRARRAY,
     CLASS_CAR,
@@ -27,7 +27,10 @@ enum classes {
     CLASS_CELL,
     CLASS_OPP,
     CLASS_SYMBOL,
-    CLASS_DEFINE
+    CLASS_CTX,
+    CLASS_SEP,
+    CLASS_STATEMENT,
+    CLASS_STMT_LEAD
 };
 
 enum collection_status {
@@ -48,14 +51,14 @@ typedef struct abs {
 } CtlAbs;
 
 CtlAbs *ctl_ref_incr(CtlAbs *obj){
-    if(obj->base.class != CLASS_UNKNOWN){
+    if(obj->base.class != CLASS_NULL){
         obj->base._refi++;
     }
     return obj;
 }
 
 CtlAbs *ctl_ref_decr(CtlAbs *obj){
-    if(obj->base.class != CLASS_UNKNOWN){
+    if(obj->base.class != CLASS_NULL){
         if(--obj->base._refi <= 0 && !obj->base._collected){
             obj->base._collected = 1;
             obj->base.free(obj);

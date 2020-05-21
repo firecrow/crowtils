@@ -62,4 +62,33 @@ void ct_tree_print(struct treeprint_head *tph, void *root){
   ct_tree_print_fnc(tph, root, true);
 }
 
+void *get_left(void *_n){
+    struct node *n = (struct node *)_n;
+    return n->children[0];
+}
+
+void *get_right(void *_n){
+    struct node *n = (struct node *)_n;
+    return n->children[1];
+}
+
+void *get_parent(void *_n){
+    struct node *n = (struct node *)_n;
+    return n->parent;
+}
+
+void out(void *_n){
+    struct node *n = (struct node *)_n;
+    CtlCounted *key = (CtlCounted *)n->key;
+    if(n->is_red) printf("\x1b[31m%s\x1b[0m", ctl_counted_to_cstr(key));
+    else printf("%s", ctl_counted_to_cstr(key));
+}
+
+void out_int(void *_n){
+    struct node *n = (struct node *)_n;
+    CtlInt *key = (CtlInt *)n->key;
+    if(n->is_red) printf("\x1b[31m%d\x1b[0m", key->value);
+    else printf("%d", key->value);
+}
+
 

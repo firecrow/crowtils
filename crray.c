@@ -54,9 +54,15 @@ void ctl_crray_push(Crray *arr, CtlAbs *obj){
 }
 
 void ctl_crray_remove(Crray *arr, int idx){
+    if(idx == -1) idx = arr->length-1;
     ctl_ref_decr(arr->content[idx]);
     memmove(arr->content+idx, arr->content+(idx+1), (arr->length-idx)*sizeof(void *));
     arr->length--;
+}
+
+CtlAbs *ctl_crray_tail(Crray *arr){
+    if(arr->length < 1) ctl_xerrlog("error fetching tail length already at 1\n");
+    return arr->content[arr->length-1];
 }
 
 CtlAbs *ctl_crray_pop(Crray *arr, int idx){

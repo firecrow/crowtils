@@ -42,7 +42,7 @@ CtlCounted *ctl_counted_alloc(char *data, size_t length){
 }
 
 CtlCounted *asCtlCounted(CtlAbs *abs){
-    if(abs->base.class != CLASS_INT){
+    if(abs->base.class != CLASS_COUNTED){
         ctl_xerrlog("Attempted cast to CLASS_INT from incompatible class type");
     }
     return (CtlCounted *)abs;
@@ -90,4 +90,12 @@ void ctl_counted_push(CtlCounted *c, char *data, size_t length){
     }
     memcpy(c->data+c->length, data, length);
     c->length += length;
+}
+
+CtlCounted *ctl_counted_incr(CtlCounted *counted){
+    return (CtlCounted *)ctl_ref_incr((CtlAbs *)counted);
+}
+
+CtlCounted *ctl_counted_decr(CtlCounted *counted){
+    return (CtlCounted *)ctl_ref_decr((CtlAbs *)counted);
 }

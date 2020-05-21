@@ -56,7 +56,7 @@ CtlFloat *ctl_float_alloc(float x){
 
 CtlInt *asCtlInt(CtlAbs *abs){
     if(abs->base.class != CLASS_INT){
-        ctl_xerrlog("Attempted cast to CLASS_INT from incompatible class type");
+        return NULL;
     }
     return (CtlInt *)abs;
 }

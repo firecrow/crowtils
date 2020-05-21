@@ -293,6 +293,8 @@ static CtlInt *gather_count(CtlTreeNode *n, CtlInt *count){
 }
 
 int ctl_tree_size(CtlTree *t){
+    if(t->root == NULL)
+        return 0;
     return gather_count(t->root, NULL)->value;
 }
 
@@ -343,6 +345,10 @@ CtlTreeIter *ctl_tree_iter(CtlTree *tree){
     iter->next = ctl_tree_iter_next; 
     iter->size = ctl_tree_iter_size; 
     return iter;
+}
+
+int ctl_tree_empty(CtlTree *tree){
+    return tree->root == NULL;
 }
 
 /*
